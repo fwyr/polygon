@@ -2,6 +2,34 @@
 
 A polygon-utilizing search algorithm.
 
+## Description
+This repository contains the source code for a new and potentially useful search algorithm that can be used within graphs (with nodes and edges) to find an optimal path between a starting node and an ending node.
+
+### Rules of Algorithm
+1. In an undirected and weighted graph, draw an imaginary straight line from the starting node to the ending node.
+
+2. Using auxiliary points, flip the graph about the imaginary line.
+
+3. Calculate the distance of points from the imaginary line.
+
+4. Check if a polygon exists (polygons are stored as strings of points).
+    - If yes, check if the furthest point's name is in the string.
+        - If yes, remove the point and repeat step 4.
+        - If not, remove the point and continue with the next furthest point.
+    - If not, include the recently removed point (P). If there is no recently removed point, use the point furthest from the imaginary line.
+        - Use recursion from the starting node to point P, and from point P to the ending node.
+
+
+## Authors and acknowledgment
+Developed and maintained by:
+- Ma Weiyi, @objected
+
+
+## License
+This repository is licensed under the [Mozilla Public License Version 2.0](https://choosealicense.com/licenses/mpl-2.0/). 
+
+
+<!-- 
 ## Getting started
 
 To make it easy for you to get started with GitLab, here's a list of recommended next steps.
@@ -90,3 +118,4 @@ For open source projects, say how it is licensed.
 
 ## Project status
 If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+-->
