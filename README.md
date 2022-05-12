@@ -26,7 +26,7 @@ Developed and maintained by:
 
 
 ## License
-This repository is licensed under the [Mozilla Public License Version 2.0](https://choosealicense.com/licenses/mpl-2.0/). 
+This repository is licensed under the [GNU General Public License v3.0](./LICENSE). 
 
 
 <!-- 
