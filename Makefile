@@ -12,8 +12,8 @@ SRCEXTS = .cc .cpp .CPP .c++ .cxx .cp
 HDREXTS = .h .H .hh .hpp .HPP .h++ .hxx .hp
 
 # pre-processor and compiler options
-CFLAGS = -g -O2
-CXXFLAGS = -g -O2
+CFLAGS = -g -O2 -std=c++20
+CXXFLAGS = -g -O2 -std=c++20
 MY_CFLAGS = 
 MY_LIBS = 
 LDFLAGS = 
@@ -24,6 +24,7 @@ CXX = g++
 
 # command used for file deletion
 RM = rm -f
+DELETES = *.d *.o *.exe *.out *.app 
 
 SHEll = /bin/sh 
 EMPTY = 
@@ -104,7 +105,7 @@ endif
 endif
 
 clean:
-	$(RM) $(OBJS) $(PROGRAM) $(PROGRAM).exe 
+	$(RM) $(DELETES)
 
 # show help
 help:
