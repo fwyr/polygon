@@ -1,12 +1,12 @@
 #include <iostream>
 #include <vector>
-#include <structs.hpp>
+#include "structs.hpp"
 using namespace std;
 vector<vector<Edge>> adj(1000); 
 vector<int> pathway;
 vector<bool> visited(1000);
 
-bool dfs(const int s) {
+void dfs(const int s) {
     if (visited[s]) return;
     visited[s] = true;
     pathway.push_back(s);
@@ -37,10 +37,11 @@ int main() {
     cout << "For the following nodes, input x, y, and z-coordinates (space-separated).\n";
 
     for (int i = 1; i <= n; i++) {
-        cout << "Node" << i << ": ";
+        cout << "Node " << i << ": ";
         cin >> x >> y >> z;
 
         Node cur;
+        cur.name = i;
         cur.xcoord = x;
         cur.ycoord = y;
         cur.zcoord = z;
