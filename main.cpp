@@ -1,19 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <structs.hpp>
 using namespace std;
-struct Node {
-    int name;
-    int xcoord;
-    int ycoord;
-    int zcoord;
-};
-
-struct Edge {
-    Node end;
-    int weight;
-};
-
-// nodes are stored (name, x, y, z), weight
 vector<vector<Edge>> adj(1000); 
 vector<int> pathway;
 vector<bool> visited(1000);
