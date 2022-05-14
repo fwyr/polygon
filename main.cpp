@@ -1,47 +1,86 @@
 #include <iostream>
 #include <vector>
+#include <structs.hpp>
 using namespace std;
-vector<pair<int, int>> adj[1000];
-vector<int> path;
-bool visited[1000];
-int n, e, a, b, w;
+struct Node {
+    int name;
+    int xcoord;
+    int ycoord;
+    int zcoord;
+};
 
-bool dfs(int s) {
+struct Edge {
+    Node end;
+    int weight;
+};
+
+// nodes are stored (name, x, y, z), weight
+vector<vector<Edge>> adj(1000); 
+vector<int> pathway;
+vector<bool> visited(1000);
+
+bool dfs(const int s) {
     if (visited[s]) return;
     visited[s] = true;
-    path.push_back(s);
+    pathway.push_back(s);
 
-    for (auto x: path) {
-        cout << x << " ";
+    for (auto u: pathway) {
+        cout << u << " ";
     }
 
     cout << "\n";
 
-    for (auto x: adj[s]) {
-        dfs(x.first);
+    for (auto u: adj[s]) {
+        dfs(u.end.name);
     }
 
-    path.pop_back();
+    pathway.pop_back();
 }
 
+
 int main() {
+    int n, e, a, b, w, x, y, z;
     cout << "Input number of nodes: "; cin >> n;
     cout << "Input number of edges: "; cin >> e;
 
-    cout << "For the following prompts, input start node, end node, and weight (space-separated).\n";
+    vector<Node> nodes(n+2);
+    adj = vector<vector<Edge>>(e+2);
+    visited = vector<bool>(e+2);
+
+    cout << "For the following nodes, input x, y, and z-coordinates (space-separated).\n";
+
+    for (int i = 1; i <= n; i++) {
+        cout << "Node" << i << ": ";
+        cin >> x >> y >> z;
+
+        Node cur;
+        cur.xcoord = x;
+        cur.ycoord = y;
+        cur.zcoord = z;
+
+        nodes[i] = cur;
+    }
+
+    cout << "For the following edges, start node, end node, and weight (space-separated).\n";
 
     for (int i = 1; i <= e; i++) {
         cout << "Edge " << i << ": ";
         cin >> a >> b >> w;
 
-        adj[a].push_back(make_pair(b, w));
-        adj[b].push_back(make_pair(a, w));
+        Edge to, from;
+        to.end = nodes[b];
+        to.weight = w;
+        from.end = nodes[a];
+        from.weight = w;
+
+        adj[a].push_back(to);
+        adj[b].push_back(from);
     }
 
     for (int i = 1; i <= n; i++) {
         cout << i << ": ";
-        for (auto x: adj[i]) {
-            cout << "(to " << x.first << ", travel " << x.second << ") ";
+        for (auto u: adj[i]) {
+            cout << "(to " << u.end.name << ", travel " << u.weight << ") ";
         }
         cout << '\n';
     }
