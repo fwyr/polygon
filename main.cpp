@@ -1,6 +1,5 @@
 #include <iostream>
 #include <vector>
-#include <structs.hpp>
 using namespace std;
 struct Node {
     int name;
