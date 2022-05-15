@@ -1,31 +1,14 @@
-# executable file name, 'a.out' by default
 PROGRAM = main.out
-
-# source file directories
 SRCDIRS = 
-
-# pre-processor options used by cpp
 CPPFLAGS = -Wall -Wextra -Wshadow -pedantic
-
-# source file types (C files are removed)
-SRCEXTS = .cc .cpp .CPP .c++ .cxx .cp
+SRCEXTS = .c .C .cc .cpp .CPP .c++ .cxx .cp
 HDREXTS = .h .H .hh .hpp .HPP .h++ .hxx .hp
-
-# pre-processor and compiler options
 CFLAGS = -g -O2 -std=c++20
 CXXFLAGS = -g -O2 -std=c++20
-MY_CFLAGS = 
-MY_LIBS = 
-LDFLAGS = 
-
-# program compilers for C and C++
 CC = g++
 CXX = g++
-
-# command used for file deletion
 RM = rm -f
 DELETES = *.d *.o *.exe *.out *.app 
-
 SHEll = /bin/sh 
 EMPTY = 
 SPACE = $(EMPTY) $(EMPTY)
@@ -48,53 +31,43 @@ DEPS    = $(OBJS:.o=.d)
 
 DEP_OPT = $(shell if `$(CC) --version | grep "GCC" >/dev/null`; then \
                   echo "-MM -MP"; else echo "-M"; fi )
-DEPEND      = $(CC)  $(DEP_OPT)  $(MY_CFLAGS) $(CFLAGS) $(CPPFLAGS)
+DEPEND      = $(CC)  $(DEP_OPT)  $(CFLAGS) $(CPPFLAGS)
 DEPEND.d    = $(subst -g ,,$(DEPEND))
-COMPILE.c   = $(CC)  $(MY_CFLAGS) $(CFLAGS)   $(CPPFLAGS) -c
-COMPILE.cxx = $(CXX) $(MY_CFLAGS) $(CXXFLAGS) $(CPPFLAGS) -c
-LINK.c      = $(CC)  $(MY_CFLAGS) $(CFLAGS)   $(CPPFLAGS) $(LDFLAGS)
-LINK.cxx    = $(CXX) $(MY_CFLAGS) $(CXXFLAGS) $(CPPFLAGS) $(LDFLAGS)
+COMPILE.c   = $(CC)  $(CFLAGS)   $(CPPFLAGS) -c
+COMPILE.cxx = $(CXX) $(CXXFLAGS) $(CPPFLAGS) -c
+LINK.c      = $(CC)  $(CFLAGS)   $(CPPFLAGS)
+LINK.cxx    = $(CXX) $(CXXFLAGS) $(CPPFLAGS)
 
 .PHONY: all objs clean help show
 
 .SUFFIXES:
 
 all: $(PROGRAM)
-
-# rules for .o generation
 objs:$(OBJS)
 
 %.o:%.c
 	$(COMPILE.c) $< -o $@
-
 %.o:%.C
 	$(COMPILE.cxx) $< -o $@
-
 %.o:%.cc
 	$(COMPILE.cxx) $< -o $@
-
 %.o:%.cpp
 	$(COMPILE.cxx) $< -o $@
-
 %.o:%.CPP
 	$(COMPILE.cxx) $< -o $@
-
 %.o:%.c++
 	$(COMPILE.cxx) $< -o $@
-
 %.o:%.cp
 	$(COMPILE.cxx) $< -o $@
-
 %.o:%.cxx
 	$(COMPILE.cxx) $< -o $@
 
-# rules for executable generation
 $(PROGRAM):$(OBJS)
 ifeq ($(SRC_CXX),)              # C program
-	$(LINK.c)   $(OBJS) $(MY_LIBS) -o $@
+	$(LINK.c)   $(OBJS)  -o $@
 	@echo Type ./$@ to execute the program.
 else                            # C++ program
-	$(LINK.cxx) $(OBJS) $(MY_LIBS) -o $@
+	$(LINK.cxx) $(OBJS)  -o $@
 	@echo Type ./$@ to execute the program.
 endif
 
@@ -107,7 +80,6 @@ endif
 clean:
 	$(RM) $(DELETES)
 
-# show help
 help:
 	@echo 'Usage: make [TARGET]'
 	@echo 'TARGETS:'
@@ -117,7 +89,6 @@ help:
 	@echo '  show      show variables (for debug use only).'
 	@echo '  help      print this message.'
 
-# show variables
 show:
 	@echo 'PROGRAM     :' $(PROGRAM)
 	@echo 'SRCDIRS     :' $(SRCDIRS)

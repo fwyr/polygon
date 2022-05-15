@@ -1,21 +1,27 @@
 #include <iostream>
 #include <vector>
-#include "structs.hpp"
-using namespace std;
-vector<vector<Edge>> adj(1000); 
-vector<int> pathway;
-vector<bool> visited(1000);
+#include <queue>
+// Edge.end, Edge.weight
+// Node.coords, Node.name
+// Coordinates.x, Coordinates.y, Coordinates.z
+#include "Edge.hpp"
 
+// Global variable declarations
+std::vector<std::vector<Edge>> adj(1000); 
+std::vector<bool> visited(1000);
+std::vector<int> pathway;
+
+// Depth-first search, print pathways
 void dfs(const int s) {
     if (visited[s]) return;
     visited[s] = true;
     pathway.push_back(s);
 
     for (auto u: pathway) {
-        cout << u << " ";
+        std::cout << u << " ";
     }
 
-    cout << "\n";
+    std::cout << "\n";
 
     for (auto u: adj[s]) {
         dfs(u.end.name);
@@ -26,34 +32,37 @@ void dfs(const int s) {
 
 
 int main() {
-    int n, e, a, b, w, x, y, z;
-    cout << "Input number of nodes: "; cin >> n;
-    cout << "Input number of edges: "; cin >> e;
+    int n, e, a, b, w;
+    double x, y, z;
+    std::cout << "Input number of nodes: "; std::cin >> n;
+    std::cout << "Input number of edges: "; std::cin >> e;
 
-    vector<Node> nodes(n+2);
-    adj = vector<vector<Edge>>(e+2);
-    visited = vector<bool>(e+2);
+    std::vector<Node> nodes(n+2);
+    adj = std::vector<std::vector<Edge>>(e+2);
+    visited = std::vector<bool>(e+2);
 
-    cout << "For the following nodes, input x, y, and z-coordinates (space-separated).\n";
+    // Input Vec3 coordinates for each Node (coords.x, coords.y, coords.z)
+    std::cout << "For the following nodes, input x, y, and z-coordinates (space-separated).\n";
 
     for (int i = 1; i <= n; i++) {
-        cout << "Node " << i << ": ";
-        cin >> x >> y >> z;
+        std::cout << "Node " << i << ": ";
+        std::cin >> x >> y >> z;
 
         Node cur;
         cur.name = i;
-        cur.xcoord = x;
-        cur.ycoord = y;
-        cur.zcoord = z;
+        cur.coords.x = x;
+        cur.coords.y = y;
+        cur.coords.z = z;
 
         nodes[i] = cur;
     }
 
-    cout << "For the following edges, start node, end node, and weight (space-separated).\n";
+    // Input 'from' node and weight for each Edge (to.end, to.weight, from.end, from.weight)
+    std::cout << "For the following edges, start node, end node, and weight (space-separated).\n";
 
     for (int i = 1; i <= e; i++) {
-        cout << "Edge " << i << ": ";
-        cin >> a >> b >> w;
+        std::cout << "Edge " << i << ": ";
+        std::cin >> a >> b >> w;
 
         Edge to, from;
         to.end = nodes[b];
@@ -65,15 +74,14 @@ int main() {
         adj[b].push_back(from);
     }
 
+    // Print out adjacency list
     for (int i = 1; i <= n; i++) {
-        cout << i << ": ";
+        std::cout << i << ": ";
         for (auto u: adj[i]) {
-            cout << "(to " << u.end.name << ", travel " << u.weight << ") ";
+            std::cout << "(to " << u.end.name << ", travel " << u.weight << ") ";
         }
-        cout << '\n';
+        std::cout << '\n';
     }
-
-    dfs(1);
 
     return 0;
 }
