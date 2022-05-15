@@ -2,6 +2,7 @@
 
 A polygon-utilizing search algorithm.
 
+
 ## Description
 This repository contains the source code for a new and potentially useful search algorithm that can be used within graphs (with nodes and edges) to find an optimal path between a starting node and an ending node.
 
@@ -19,22 +20,44 @@ This repository contains the source code for a new and potentially useful search
     - If not, include the recently removed point (P). If there is no recently removed point, use the point furthest from the imaginary line.
         - Use recursion from the starting node to point P, and from point P to the ending node.
 
+
 ## Setup
 ### Prerequisites
 - C++20, g++ compiler
 - [Git](https://git-scm.com/downloads)
 
-### Installation of Project Files
-Installing via HTTPS:
+
+### Installation
+Cloning via HTTPS:
 
     git clone https://gitlab.com/objected/polygon.git
 
-Installing via SSH:
+Cloning via SSH:
 
     git clone git@gitlab.com:objected/polygon.git
 
 Installing via ZIP folder:
-- Download the ZIP archive from the main page and extract it to a folder. This folder will now be your working directory.
+- Download the ZIP archive from the main page and extract it to a folder. 
+
+After installing the project files, remember to change your working directory to the root directory of the project.
+
+    cd polygon
+
+### Execution
+To compile and execute the program, run the following commands:
+
+    cd src
+    make all
+    ./main.out
+
+To clear compiled object and executable files after compilation, run the following command:
+
+    make clean
+
+Other commands available in the Makefile can be shown by running the following command:
+
+    make help
+
 
 ## Acknowledgment
 Developed and maintained by:
