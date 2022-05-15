@@ -7,11 +7,11 @@ A polygon-utilizing search algorithm.
 This repository contains the source code for a new and potentially useful search algorithm that can be used within graphs (with nodes and edges) to find an optimal path between a starting node and an ending node.
 
 ### Rules of Algorithm
-1. In an undirected and weighted graph, draw an imaginary straight line from the starting node to the ending node.
+1. In an undirected and weighted graph, draw an auxiliary straight line from the starting node to the ending node.
 
-2. Using auxiliary points, flip the graph about the imaginary line.
+2. Flip the graph about the auxiliary line.
 
-3. Calculate the distance of points from the imaginary line.
+3. Calculate the distance of points from the auxiliary line.
 
 4. Check if a polygon exists (polygons are stored as strings of points).
     - If yes, check if the furthest point's name is in the string.
@@ -66,7 +66,7 @@ Please refer to [CONTRIBUTING.md](./.gitlab/CONTRIBUTING.md) for more informatio
 
 ## Acknowledgment
 Developed and maintained by:
-- @objected
+- [@objecteds](https://github.com/objecteds)
 
 
 ## License
