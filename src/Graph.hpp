@@ -1,5 +1,5 @@
 /****************************** Module Header ******************************\
-    Module Name:  Edge.hpp
+    Module Name:  main.cpp
     Project:      Polygon
     Copyright (c) 2022 objected
 
@@ -19,40 +19,15 @@
 
 #pragma once
 #include <iostream>
-#include <vector>
-#include <queue>
+#include <map>
 #include <string>
+#include <vector>
+#include "Node.hpp"
 
-class Point {
+class Graph {
     public:
-        double x;
-        double y;
-        double z;
-        Point(const double &xc, const double &yc, const double &zc) {
-            x = xc;
-            y = yc;
-            z = zc;
-        }
-};
-
-class Node {
-    public:
-        int name;
-        Point coordinates;
-        Node (const int &x, const Point &xyz) : name(x), coordinates(xyz) {
-            name = x;
-            coordinates = xyz;
-        }
-};
-
-class Edge {
-    public:
-        Node from;
-        Node to;
-        int weight;
-        Edge(const Node &a, const Node &b, const int &w) : from(a), to(b), weight(w) {
-            from = b;
-            to = a;
-            weight = w;
-        }
+        // Adjacency list
+        std::map<std::string, std::vector<std::pair<Node, double>>> adj;
+        void add_edge(Node current, Node neighbour, double weight, bool is_directed);
+        void print_graph();
 };
