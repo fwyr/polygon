@@ -7,8 +7,7 @@ Please note we have a [code of conduct](./CODE_OF_CONDUCT.md). Please make sure 
 
 ## Issue Process
 1. Ensure no related issues exist prior to your report.
-2. For bug reports, make use of the [bug report template](./issue_templates/bug_report.md). For feature requests, make use of the [feature request template](./issue_templates/feature_request.md).
-3. 
+2. For bug reports, make use of the [bug report template](./ISSUE_TEMPLATE/bug_report.md). For feature requests, make use of the [feature request template](./ISSUE_TEMPLATE/feature_request.md).
 
 ## Pull Request Process
 
