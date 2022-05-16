@@ -17,25 +17,61 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 \***************************************************************************/
 
+#include <cmath>
 #include <iostream>
-#include <vector>
+#include <map>
 #include <queue>
 #include <string>
-// Edge.end, Edge.weight
-// Node.coords, Node.name
-// Coordinates.x, Coordinates.y, Coordinates.z
-#include "Edge.hpp"
+#include <vector>
+#include "Node.hpp"
+using namespace std;
 
-// Global variable declarations
-std::vector<std::vector<Edge>> adj(1000); 
-std::vector<bool> visited(1000);
-std::vector<int> pathway;
+class Graph {
+    public:
+        // Adjacency list
+        map<std::string, vector<pair<Node, double>>> adj;
+        void add_edge(Node current, Node neighbour, double weight, bool is_directed = false) {
+            adj[current.name].push_back(make_pair(neighbour, weight));
 
-// Depth-first search, print pathways
-void dfs(const int s) {
+            // Graph is expected to be undirected but extra parameter is added in case of unforeseen circumstances
+            // is_directed marked as false by default
+            // If the edge is directed, we will not add the edge to the neighbouring vector
+            if (!is_directed) {
+                adj[neighbour.name].push_back(make_pair(current, weight));
+            }
+        }
+
+        void print_graph() {
+            // Iterate over all keys in the adjacency list map
+            // Print list of neighbours associated with these nodes
+            for (auto val: adj) {
+                // Iterate over all neighbours of node `current`
+                string name = val.first;
+                vector<pair<Node, double>> neighbours = val.second;
+
+                cout << name << ": ";
+
+                for (auto u: neighbours) {
+                    Node destination = u.first;
+                    double weight = u.second;
+                    cout << "(to: " << destination.name << ", weight: " << weight << ")";
+                }
+
+                cout << "\n";
+            }
+        }
+};
+
+std::map<std::string, Node> nodes;
+std::map<std::string, bool> visited;
+std::vector<std::string> pathway;
+Graph g;
+
+void dfs(const std::string &s) {
     if (visited[s]) return;
     visited[s] = true;
     pathway.push_back(s);
+    map<std::string, vector<pair<Node, double>>> l = g.adj;
 
     // Print out current path
     for (auto u: pathway) {
@@ -44,64 +80,68 @@ void dfs(const int s) {
 
     std::cout << "\n";
 
-    for (auto u: adj[s]) {
-        dfs(u.to.name);
+    for (auto val: l) {
+        string name = val.first;
+        vector<pair<Node, double>> neighbours = val.second;
+        for (auto u: neighbours) {
+            Node neighbour = u.first;
+            dfs(neighbour.name);
+        }
     }
 
     pathway.pop_back();
 }
 
-
 int main() {
-    int n, e, a, b, w;
-    std::cout << "Input number of nodes: "; std::cin >> n;
-    std::cout << "Input number of edges: "; std::cin >> e;
+    // Input number of nodes
+    int n;
+    std::cout << "Input number of nodes: ";
+    std::cin >> n;
 
-    std::vector<Node> nodes(n+2);
-    adj = std::vector<std::vector<Edge>>(e+2);
-    visited = std::vector<bool>(e+2);
+    // Input number of edges
+    int e;
+    std::cout << "Input number of edges: ";
+    std::cin >> e;
 
-    // Input 3-dimensional coordinates for each Node using constructors
-    // Point(coordinates.x, coordinates.y, coordinates.z)
-    // Node(name, Point)
-    std::cout << "For the following nodes, input name, x, y, and z-coordinates (space-separated).\n";
-
+    // Input 3-dimensional coordinates and store nodes
+    std::cout << "For the following nodes, input name, x, y, and z-coordinates "
+                 "(4 space-separated inputs).\n";
     for (int i = 1; i <= n; i++) {
+        std::string s;
         double x, y, z;
-
         std::cout << "Node " << i << ": ";
-        std::cin >> x >> y >> z;
+        std::cin >> s >> x >> y >> z;
 
-        Point p(x, y, z);
-        Node current(i, p);
+        Node cur;
+        cur.name = s;
+        cur.x_coordinate = x;
+        cur.y_coordinate = y;
+        cur.z_coordinate = z;
 
-        nodes[i] = current;
+        nodes[s] = cur;
     }
 
-    // Input Node and weight for each Edge
-    // from(name, Point), to(name, Point)
-    // Edge(from, to, weight)
-    std::cout << "For the following edges, start node, end node, and weight (space-separated).\n";
-
+    // Input Node name and calculate weight for each Edge
+    std::cout << "For the following edges, input the name of the start node "
+                 "and end node (2 space-separated inputs).\n";
     for (int i = 1; i <= e; i++) {
+        std::string a, b;
         std::cout << "Edge " << i << ": ";
-        std::cin >> a >> b >> w;
+        std::cin >> a >> b;
 
-        Edge first(nodes[a], nodes[b], w);
-        Edge second(nodes[b], nodes[a], w);
+        Node first = nodes[a];
+        Node second = nodes[b];
 
-        adj[a].push_back(first);
-        adj[b].push_back(second);
+        double run = abs(second.x_coordinate - first.x_coordinate);
+        double rise = abs(second.y_coordinate - first.y_coordinate);
+        double weight = std::hypot(run, rise);
+
+        g.add_edge(first, second, weight, false);
     }
 
-    // Print out adjacency list
-    for (int i = 1; i <= n; i++) {
-        std::cout << i << ": ";
-        for (auto u: adj[i]) {
-            std::cout << "(to " << u.to.name << ", travel " << u.weight << ") ";
-        }
-        std::cout << '\n';
-    }
+    g.print_graph();
+
+    // dfs("one");
 
     return 0;
 }
