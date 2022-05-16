@@ -19,19 +19,40 @@
 
 #pragma once
 #include <iostream>
+#include <vector>
+#include <queue>
+#include <string>
 
-struct Coordinates {
-    double x;
-    double y;
-    double z;
+class Point {
+    public:
+        double x;
+        double y;
+        double z;
+        Point(const double &xc, const double &yc, const double &zc) {
+            x = xc;
+            y = yc;
+            z = zc;
+        }
 };
 
-struct Node {
-    int name;
-    Coordinates coords;
+class Node {
+    public:
+        int name;
+        Point coordinates;
+        Node (const int &x, const Point &xyz) : name(x), coordinates(xyz) {
+            name = x;
+            coordinates = xyz;
+        }
 };
 
-struct Edge {
-    Node end;
-    int weight;
+class Edge {
+    public:
+        Node from;
+        Node to;
+        int weight;
+        Edge(const Node &a, const Node &b, const int &w) : from(a), to(b), weight(w) {
+            from = b;
+            to = a;
+            weight = w;
+        }
 };
