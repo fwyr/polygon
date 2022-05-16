@@ -25,7 +25,6 @@
 #include <vector>
 #include "Node.hpp"
 #include "Graph.hpp"
-using namespace std;
 
 std::map<std::string, Node> nodes;
 std::map<std::string, bool> visited;
@@ -36,7 +35,7 @@ void dfs(const std::string &s) {
     if (visited[s]) return;
     visited[s] = true;
     pathway.push_back(s);
-    map<std::string, vector<pair<Node, double>>> l = g.adj;
+    std::map<std::string, std::vector<std::pair<Node, double>>> l = g.adj;
 
     // Print out current path
     for (auto u: pathway) {
@@ -46,8 +45,8 @@ void dfs(const std::string &s) {
     std::cout << "\n";
 
     for (auto val: l) {
-        string name = val.first;
-        vector<pair<Node, double>> neighbours = val.second;
+        std::string name = val.first;
+        std::vector<std::pair<Node, double>> neighbours = val.second;
         for (auto u: neighbours) {
             Node neighbour = u.first;
             dfs(neighbour.name);
@@ -106,7 +105,7 @@ int main() {
 
     g.print_graph();
 
-    // dfs("one");
+    dfs("one");
 
     return 0;
 }
