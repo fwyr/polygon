@@ -1,5 +1,5 @@
 /****************************** Module Header ******************************\
-    Module Name:  Node.hpp
+    Module Name:  main.cpp
     Project:      Polygon
     Copyright (c) 2022 objected
 
@@ -18,10 +18,16 @@
 \***************************************************************************/
 
 #pragma once
+#include <iostream>
+#include <map>
+#include <string>
+#include <vector>
+#include "Node.hpp"
 
-struct Node {
-    std::string name;
-    double x_coordinate;
-    double y_coordinate;
-    double z_coordinate;
+class Graph {
+    public:
+        // Adjacency list
+        std::map<std::string, std::vector<std::pair<Node, double>>> adj;
+        void add_edge(Node current, Node neighbour, double weight, bool is_directed = false);
+        void print_graph();
 };

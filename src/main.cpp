@@ -24,43 +24,8 @@
 #include <string>
 #include <vector>
 #include "Node.hpp"
+#include "Graph.hpp"
 using namespace std;
-
-class Graph {
-    public:
-        // Adjacency list
-        map<std::string, vector<pair<Node, double>>> adj;
-        void add_edge(Node current, Node neighbour, double weight, bool is_directed = false) {
-            adj[current.name].push_back(make_pair(neighbour, weight));
-
-            // Graph is expected to be undirected but extra parameter is added in case of unforeseen circumstances
-            // is_directed marked as false by default
-            // If the edge is directed, we will not add the edge to the neighbouring vector
-            if (!is_directed) {
-                adj[neighbour.name].push_back(make_pair(current, weight));
-            }
-        }
-
-        void print_graph() {
-            // Iterate over all keys in the adjacency list map
-            // Print list of neighbours associated with these nodes
-            for (auto val: adj) {
-                // Iterate over all neighbours of node `current`
-                string name = val.first;
-                vector<pair<Node, double>> neighbours = val.second;
-
-                cout << name << ": ";
-
-                for (auto u: neighbours) {
-                    Node destination = u.first;
-                    double weight = u.second;
-                    cout << "(to: " << destination.name << ", weight: " << weight << ")";
-                }
-
-                cout << "\n";
-            }
-        }
-};
 
 std::map<std::string, Node> nodes;
 std::map<std::string, bool> visited;
