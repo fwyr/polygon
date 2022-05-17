@@ -26,7 +26,6 @@
 #include "Node.hpp"
 #include "Graph.hpp"
 
-std::map<std::string, Node> nodes;
 std::map<std::string, bool> visited;
 std::vector<std::string> pathway;
 Graph g;
@@ -82,7 +81,7 @@ int main() {
         cur.y_coordinate = y;
         cur.z_coordinate = z;
 
-        nodes[s] = cur;
+        g.nodes[s] = cur;
     }
 
     // Input Node name and calculate weight for each Edge
@@ -93,8 +92,8 @@ int main() {
         std::cout << "Edge " << i << ": ";
         std::cin >> a >> b;
 
-        Node first = nodes[a];
-        Node second = nodes[b];
+        Node first = g.nodes[a];
+        Node second = g.nodes[b];
 
         double run = abs(second.x_coordinate - first.x_coordinate);
         double rise = abs(second.y_coordinate - first.y_coordinate);
