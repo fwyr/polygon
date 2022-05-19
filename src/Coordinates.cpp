@@ -1,5 +1,5 @@
 /****************************** Module Header ******************************\
-    Module Name:  Node.cpp
+    Module Name:  Coordinates.cpp
     Project:      Polygon
     Copyright (c) 2022 objected
 
@@ -19,6 +19,5 @@
 
 #include <iostream>
 #include "Node.hpp"
-#include "Coordinates.hpp"
 
-struct Node node;
+struct Coordinates coordinates;

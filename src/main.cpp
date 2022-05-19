@@ -23,6 +23,7 @@
 #include <queue>
 #include <string>
 #include <vector>
+#include "Coordinates.hpp"
 #include "Node.hpp"
 #include "Graph.hpp"
 
@@ -67,7 +68,7 @@ int main() {
     std::cin >> e;
 
     // Input 3-dimensional coordinates and store nodes
-    std::cout << "For the following nodes, input name, x, y, and z-coordinates "
+    std::cout << "For the following nodes, input name, x, y, and z-coordinates"
                  "(4 space-separated inputs).\n";
     for (int i = 1; i <= n; i++) {
         std::string s;
@@ -75,18 +76,21 @@ int main() {
         std::cout << "Node " << i << ": ";
         std::cin >> s >> x >> y >> z;
 
+        Coordinates p;
+        p.x_coordinate = x;
+        p.y_coordinate = y;
+        p.z_coordinate = z;
+
         Node cur;
         cur.name = s;
-        cur.x_coordinate = x;
-        cur.y_coordinate = y;
-        cur.z_coordinate = z;
+        cur.point = p;
 
         g.nodes[s] = cur;
     }
 
     // Input Node name and calculate weight for each Edge
-    std::cout << "For the following edges, input the name of the start node "
-                 "and end node (2 space-separated inputs).\n";
+    std::cout << "For the following edges, input the name of the start node and end node"
+                 "(2 space-separated inputs).\n";
     for (int i = 1; i <= e; i++) {
         std::string a, b;
         std::cout << "Edge " << i << ": ";
@@ -95,8 +99,8 @@ int main() {
         Node first = g.nodes[a];
         Node second = g.nodes[b];
 
-        double run = abs(second.x_coordinate - first.x_coordinate);
-        double rise = abs(second.y_coordinate - first.y_coordinate);
+        double run = abs(second.point.x_coordinate - first.point.x_coordinate);
+        double rise = abs(second.point.y_coordinate - first.point.y_coordinate);
         double weight = std::hypot(run, rise);
 
         g.add_edge(first, second, weight, false);

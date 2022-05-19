@@ -1,5 +1,5 @@
 /****************************** Module Header ******************************\
-    Module Name:  Node.cpp
+    Module Name:  Coordinates.hpp
     Project:      Polygon
     Copyright (c) 2022 objected
 
@@ -17,8 +17,10 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 \***************************************************************************/
 
-#include <iostream>
-#include "Node.hpp"
-#include "Coordinates.hpp"
+#pragma once
 
-struct Node node;
+struct Coordinates {
+    double x_coordinate;
+    double y_coordinate;
+    double z_coordinate;
+};

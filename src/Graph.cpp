@@ -54,4 +54,3 @@ void Graph::print_graph() {
         std::cout << "\n";
     }
 }
-

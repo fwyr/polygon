@@ -18,10 +18,9 @@
 \***************************************************************************/
 
 #pragma once
+#include "Coordinates.hpp"
 
 struct Node {
     std::string name;
-    double x_coordinate;
-    double y_coordinate;
-    double z_coordinate;
+    Coordinates point;
 };
