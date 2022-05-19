@@ -22,31 +22,3 @@
 #include "Node.hpp"
 
 struct Node node;
-
-/*
-BELOW CODE IS COMMENTED OUT FOR SAFEKEEPING, LIKELY TO BE REMOVED
-
-class Point {
-    public:
-        double x;
-        double y;
-        double z;
-        Point(const double &xc, const double &yc, const double &zc) {
-            x = xc;
-            y = yc;
-            z = zc;
-        }
-};
-
-class Edge {
-    public:
-        Node from;
-        Node to;
-        int weight;
-        Edge(const Node &a, const Node &b, const int &w) : from(a), to(b), weight(w) {
-            from = b;
-            to = a;
-            weight = w;
-        }
-};
-*/

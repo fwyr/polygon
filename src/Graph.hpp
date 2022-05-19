@@ -1,5 +1,5 @@
 /****************************** Module Header ******************************\
-    Module Name:  main.cpp
+    Module Name:  Graph.hpp
     Project:      Polygon
     Copyright (c) 2022 objected
 
@@ -26,8 +26,8 @@
 
 class Graph {
     public:
-        // Adjacency list
         std::map<std::string, Node> nodes;
+        // Adjacency list
         std::map<std::string, std::vector<std::pair<Node, double>>> adj;
         void add_edge(Node current, Node neighbour, double weight, bool is_directed);
         void print_graph();
