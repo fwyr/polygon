@@ -29,6 +29,8 @@ class Graph {
         std::map<std::string, Node> nodes;
         // Adjacency list
         std::map<std::string, std::vector<std::pair<Node, double>>> adj;
+        std::tuple<double, double, double> line;
         void add_edge(Node current, Node neighbour, double weight, bool is_directed);
         void print_graph();
+        void calculate_line(Node start, Node end);
 };

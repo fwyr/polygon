@@ -26,6 +26,7 @@
 #include "Coordinates.hpp"
 #include "Node.hpp"
 #include "Graph.hpp"
+#include "Furthest.hpp"
 
 std::map<std::string, bool> visited;
 std::vector<std::string> pathway;
@@ -68,7 +69,7 @@ int main() {
     std::cin >> e;
 
     // Input 3-dimensional coordinates and store nodes
-    std::cout << "For the following nodes, input name, x, y, and z-coordinates"
+    std::cout << "For the following nodes, input name, x, y, and z-coordinates "
                  "(4 space-separated inputs).\n";
     for (int i = 1; i <= n; i++) {
         std::string s;
@@ -89,7 +90,7 @@ int main() {
     }
 
     // Input Node name and calculate weight for each Edge
-    std::cout << "For the following edges, input the name of the start node and end node"
+    std::cout << "For the following edges, input the name of the start node and end node "
                  "(2 space-separated inputs).\n";
     for (int i = 1; i <= e; i++) {
         std::string a, b;
@@ -106,6 +107,16 @@ int main() {
         g.add_edge(first, second, weight, false);
     }
 
+    // Input start Node and end Node
+    std::cout << "Input the starting node and the ending node "
+                 "(2 space-separated inputs).\n";
+    std::string start_node_str, end_node_str;
+    std::cin >> start_node_str >> end_node_str;
+    Node start_node = g.nodes[start_node_str];
+    Node end_node = g.nodes[end_node_str];
+    
+    // Do some graphies
+    g.calculate_line(start_node, end_node);
     g.print_graph();
 
     dfs("one");

@@ -23,6 +23,7 @@
 #include <vector>
 #include "Node.hpp"
 #include "Graph.hpp"
+#include "Furthest.hpp"
 
 void Graph::add_edge(Node current, Node neighbour, double weight, bool is_directed = false) {
     adj[current.name].push_back(std::make_pair(neighbour, weight));
@@ -53,4 +54,18 @@ void Graph::print_graph() {
 
         std::cout << "\n";
     }
+}
+
+void Graph::calculate_line(Node start, Node end) {
+    double m_A = start.point.y_coordinate - end.point.y_coordinate;
+    double m_B = end.point.x_coordinate - start.point.x_coordinate;
+    double m_C = start.point.x_coordinate * end.point.y_coordinate - end.point.x_coordinate * start.point.y_coordinate;
+
+    if (m_A == 0 && m_B == 0) {
+        std::cout << "Line error: A & B = 0";
+    }
+
+    std::tuple<double, double, double> linevalues = std::make_tuple(m_A, m_B, m_C);
+
+    Graph::line = linevalues;
 }
