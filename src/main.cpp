@@ -26,11 +26,14 @@
 #include "Coordinates.hpp"
 #include "Node.hpp"
 #include "Graph.hpp"
-#include "Furthest.hpp"
 
 std::map<std::string, bool> visited;
 std::vector<std::string> pathway;
 Graph g;
+
+void clear() {
+    std::cout << "\x1B[2J\x1B[H"; // clears terminal
+}
 
 void dfs(const std::string &s) {
     if (visited[s]) return;
@@ -58,19 +61,22 @@ void dfs(const std::string &s) {
 }
 
 int main() {
+    clear();
+
     // Input number of nodes
     int n;
     std::cout << "Input number of nodes: ";
     std::cin >> n;
+    clear();
 
     // Input number of edges
     int e;
     std::cout << "Input number of edges: ";
     std::cin >> e;
+    clear();
 
     // Input 3-dimensional coordinates and store nodes
-    std::cout << "For the following nodes, input name, x, y, and z-coordinates "
-                 "(4 space-separated inputs).\n";
+    std::cout << "For the following nodes, input name, x, y, and z-coordinates (4 space-separated inputs).\n";
     for (int i = 1; i <= n; i++) {
         std::string s;
         double x, y, z;
@@ -88,10 +94,10 @@ int main() {
 
         g.nodes[s] = cur;
     }
+    clear();
 
     // Input Node name and calculate weight for each Edge
-    std::cout << "For the following edges, input the name of the start node and end node "
-                 "(2 space-separated inputs).\n";
+    std::cout << "For the following edges, input the name of the start node and end node (2 space-separated inputs).\n";
     for (int i = 1; i <= e; i++) {
         std::string a, b;
         std::cout << "Edge " << i << ": ";
@@ -106,20 +112,26 @@ int main() {
 
         g.add_edge(first, second, weight, false);
     }
+    clear();
 
     // Input start Node and end Node
-    std::cout << "Input the starting node and the ending node "
-                 "(2 space-separated inputs).\n";
+    std::cout << "Input the starting node and the ending node (2 space-separated inputs).\n";
     std::string start_node_str, end_node_str;
     std::cin >> start_node_str >> end_node_str;
     Node start_node = g.nodes[start_node_str];
     Node end_node = g.nodes[end_node_str];
+    clear();
     
     // Do some graphies
     g.calculate_line(start_node, end_node);
+
+    std::cout << "Print adjacency list:\n";
     g.print_graph();
 
+    std::cout << "\nPrint traversal of DFS:\n";
     dfs("one");
+
+    std::cout << "\nEnd of output.";
 
     return 0;
 }

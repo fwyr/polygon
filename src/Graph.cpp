@@ -23,7 +23,6 @@
 #include <vector>
 #include "Node.hpp"
 #include "Graph.hpp"
-#include "Furthest.hpp"
 
 void Graph::add_edge(Node current, Node neighbour, double weight, bool is_directed = false) {
     adj[current.name].push_back(std::make_pair(neighbour, weight));
