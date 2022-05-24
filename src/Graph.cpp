@@ -18,6 +18,7 @@
 \***************************************************************************/
 
 #include <iostream>
+#include <cmath>
 #include <map>
 #include <string>
 #include <vector>
@@ -67,4 +68,12 @@ void Graph::calculate_line(Node start, Node end) {
     std::tuple<double, double, double> linevalues = std::make_tuple(m_A, m_B, m_C);
 
     Graph::line = linevalues;
+}
+
+double Graph::distance_point_to_line(Node n) {
+    Coordinates p = n.point;
+    double m_A = std::get<0>(Graph::line);
+    double m_B = std::get<1>(Graph::line);
+    double m_C = std::get<2>(Graph::line);
+    return abs(m_A * p.x_coordinate + m_B * p.y_coordinate + m_C) / std::hypot(m_A, m_B);
 }

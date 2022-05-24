@@ -30,7 +30,9 @@ class Graph {
         // Adjacency list
         std::map<std::string, std::vector<std::pair<Node, double>>> adj;
         std::tuple<double, double, double> line;
+        std::map<double, std::string> furthest_points;
         void add_edge(Node current, Node neighbour, double weight, bool is_directed);
         void print_graph();
         void calculate_line(Node start, Node end);
+        double distance_point_to_line(Node n);
 };
