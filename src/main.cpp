@@ -22,7 +22,9 @@
 #include <map>
 #include <queue>
 #include <string>
+#include <set>
 #include <vector>
+#include <stack>
 #include "Coordinates.hpp"
 #include "Node.hpp"
 #include "Graph.hpp"
