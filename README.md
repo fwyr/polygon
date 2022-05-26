@@ -18,7 +18,8 @@ This repository contains the source code for a new and potentially useful search
         - If yes, remove the point and repeat step 4.
         - If not, remove the point and continue with the next furthest point.
     - If not, 
-        - Include the recently removed point (P).- If there is no recently removed point (no polygons initially), use the point furthest from the imaginary line.
+        - Include the recently removed point (P).
+        - If there is no recently removed point (no polygons initially), use the point furthest from the imaginary line.
         - Split the graph from the starting node to P, and from P to the ending node.
         - Utilise recursion to find the next crucial points within the two new sub-graphs (repeat step 1 - 4).
 
