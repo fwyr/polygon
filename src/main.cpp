@@ -131,7 +131,10 @@ int main() {
     g.print_graph();
 
     std::cout << "\nPrint traversal of DFS:\n";
-    dfs("one");
+    dfs(start_node.name);
+
+    g.calculate_furthest_nodes();
+    std::cout << g.get_furthest_node();
 
     std::cout << "\nEnd of output.";
 

@@ -41,4 +41,5 @@ class Graph{
         void calculate_line(Node &start, Node &end);
         double distance_point_to_line(Node n);
         void calculate_furthest_nodes();
+        std::string get_furthest_node();
 };

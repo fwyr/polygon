@@ -87,3 +87,8 @@ void Graph::calculate_furthest_nodes() {
         Graph::node_distances.insert(dist);
     }
 }
+
+std::string Graph::get_furthest_node() {
+    double furthest_dist = *Graph::node_distances.rbegin();
+    return Graph::furthest_nodes[furthest_dist].top();
+}
