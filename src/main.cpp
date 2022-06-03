@@ -31,31 +31,37 @@
 
 std::map<std::string, bool> visited;
 std::vector<std::string> pathway;
+std::vector<std::string> polygon;
+bool found = false;
 Graph g;
 
 void clear() {
     std::cout << "\x1B[2J\x1B[H"; // clears terminal
 }
 
-void dfs(const std::string &s) {
+void dfs(const std::string &s, const std::string &end) {
     if (visited[s]) return;
     visited[s] = true;
     pathway.push_back(s);
     std::map<std::string, std::vector<std::pair<Node, double>>> l = g.adj;
 
     // Print out current path
-    for (auto u: pathway) {
+    for (const auto &u: pathway) {
         std::cout << u << " ";
+        if (u == end && pathway.size() > 2 && found == false) {
+            polygon = pathway;
+            found = true;
+        }
     }
 
     std::cout << "\n";
 
-    for (auto val: l) {
+    for (const auto &val: l) {
         std::string name = val.first;
         std::vector<std::pair<Node, double>> neighbours = val.second;
-        for (auto u: neighbours) {
+        for (const auto &u: neighbours) {
             Node neighbour = u.first;
-            dfs(neighbour.name);
+            dfs(neighbour.name, end);
         }
     }
 
@@ -130,9 +136,7 @@ int main() {
     std::cout << "Print adjacency list:\n";
     g.print_graph();
 
-    std::cout << "\nPrint traversal of DFS:\n";
-    dfs(start_node.name);
-
+    std::cout << "\nPrint furthest node:\n";
     g.calculate_furthest_nodes();
     std::cout << g.get_furthest_node();
 
