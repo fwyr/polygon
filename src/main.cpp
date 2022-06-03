@@ -39,34 +39,32 @@ void clear() {
     std::cout << "\x1B[2J\x1B[H"; // clears terminal
 }
 
-void dfs(const std::string &s, const std::string &end) {
-    if (visited[s]) return;
-    visited[s] = true;
-    pathway.push_back(s);
-    std::map<std::string, std::vector<std::pair<Node, double>>> l = g.adj;
 
-    // Print out current path
-    for (const auto &u: pathway) {
-        std::cout << u << " ";
-        if (u == end && pathway.size() > 2 && found == false) {
-            polygon = pathway;
-            found = true;
+bool isPolygon(const std::string &source, const std::string &destination) {
+    if (source == destination) return false;
+    std::queue<std::string> q;
+    q.push(source);
+
+    while (!q.empty()) {
+        std::string x = q.front();
+        q.pop();
+        visited[x] = true;
+
+        for (const auto &val: g.adj) {
+            std::string name = val.first;
+            std::vector<std::pair<Node, double>> neighbours = val.second;
+            for (const auto &u: neighbours) {
+                Node neighbour = u.first;
+                if (neighbour.name == destination) {
+                    return true;
+                } else if (!visited[neighbour.name]) {
+                    q.push(neighbour.name);
+                }
+            }
         }
     }
-
-    std::cout << "\n";
-
-    for (const auto &val: l) {
-        std::string name = val.first;
-        std::vector<std::pair<Node, double>> neighbours = val.second;
-        for (const auto &u: neighbours) {
-            Node neighbour = u.first;
-            dfs(neighbour.name, end);
-        }
-    }
-
-    pathway.pop_back();
 }
+
 
 int main() {
     clear();
@@ -129,8 +127,13 @@ int main() {
     Node start_node = g.nodes[start_node_str];
     Node end_node = g.nodes[end_node_str];
     clear();
+
+    if (start_node_str == end_node_str) {
+        std::cout << "\nBoth nodes are the same.\n";
+        return 0;
+    }
     
-    // Do some graphies
+    // Do some graph calculations
     g.calculate_line(start_node, end_node);
 
     std::cout << "Print adjacency list:\n";
@@ -139,6 +142,9 @@ int main() {
     std::cout << "\nPrint furthest node:\n";
     g.calculate_furthest_nodes();
     std::cout << g.get_furthest_node();
+
+    // check if polygon exists
+
 
     std::cout << "\nEnd of output.";
 
