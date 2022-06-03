@@ -9,11 +9,9 @@ This repository contains the source code for a new and potentially useful search
 ### Rules of Algorithm
 1. In an undirected and weighted graph, draw an auxiliary straight line from the starting node to the ending node.
 
-2. Flip the graph about the auxiliary line.
+2. Calculate the distance of points from the auxiliary line.
 
-3. Calculate the distance of points from the auxiliary line.
-
-4. Check if a polygon exists (polygons are stored as strings of points).
+3. Check if a polygon exists (polygons are stored as strings of points).
     - If yes, check if the furthest point's name is in the string.
         - If yes, remove the point and repeat step 4.
         - If not, remove the point and continue with the next furthest point.
