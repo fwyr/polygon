@@ -2,6 +2,11 @@
 
 A polygon-utilizing search algorithm.
 
+## :warning: Project Status :warning:
+**This repository is currently on HIATUS.**
+
+Depending on the outcome of future events, this search algorithm may or may not be developed further code-wise.
+
 
 ## Description
 This repository contains the source code for a new and potentially useful search algorithm that can be used within graphs (with nodes and edges) to find an optimal path between a starting node and an ending node.
